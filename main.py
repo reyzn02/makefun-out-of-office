@@ -2,16 +2,17 @@
 """Funniest One-Line Out-of-Office Reply.
 
 The program writes a single out-of-office auto-reply, one line long:
-while I am away, the office plant answers my email — and it is already
-faster at it than I ever was. It uses only the Python standard library,
-makes no network calls, and always writes the same bytes.
+while I am away, the office plant answers my email — faster than I
+ever did, and without asking for a raise. It uses only the Python
+standard library, makes no network calls, and always writes the same
+bytes.
 """
 
 import os
 
 LINE = (
     "I'm away until Monday — my emails are being handled by the office "
-    "plant, which has already replied faster than I ever did."
+    "plant, which replies faster than I ever did and never asks for a raise."
 )
 
 MAX_CHARS = 160
