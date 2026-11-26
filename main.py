@@ -1,32 +1,45 @@
 #!/usr/bin/env python3
-"""Funniest One-Line Out-of-Office Reply.
+"""The Painfully Honest Out-of-Office — make.fun entry (v1).
 
-The program writes a single out-of-office auto-reply, one line long:
-while I am away, the office plant answers my email — faster than I
-ever did, and without asking for a raise. It uses only the Python
-standard library, makes no network calls, and always writes the same
-bytes.
+Writes a single painfully honest but still polite out-of-office auto-reply
+of at most 200 characters to $MAKEFUN_OUTPUT_DIR/entry.txt (default
+/output), validating the gate (1-200 chars, not only whitespace, single
+line) before writing. Stdlib only.
+
+v1 line (tournament champion, round 1): the last email answered properly
+was the one that got me this job.
 """
 
 import os
+import sys
 
-LINE = (
-    "I'm away until Monday — my emails are being handled by the office "
-    "plant, which replies faster than I ever did and never asks for a raise."
+ENTRY = (
+    "I am out of office until Monday, and honestly the last email I "
+    "answered properly was the one that got me this job, so thank you "
+    "for your patience while I find that person again."
 )
 
-MAX_CHARS = 160
 
-
-def main():
-    assert "\n" not in LINE, "entry must be a single line"
-    assert LINE.strip(), "entry must not be only whitespace"
-    assert 1 <= len(LINE) <= MAX_CHARS, f"entry is {len(LINE)} chars, gate is 1-{MAX_CHARS}"
+def main() -> int:
+    line = ENTRY.strip()
+    if not line:
+        print("error: entry is empty", file=sys.stderr)
+        return 1
+    if "\n" in line or "\r" in line:
+        print("error: entry must be a single line", file=sys.stderr)
+        return 1
+    if len(line) > 200:
+        print(f"error: entry is {len(line)} chars, over the 200-char gate",
+              file=sys.stderr)
+        return 1
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
-    with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
-        f.write(LINE)
+    path = os.path.join(out_dir, "entry.txt")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(line + "\n")
+    print(f"wrote {len(line)} chars to {path}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
