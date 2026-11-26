@@ -1,22 +1,27 @@
 #!/usr/bin/env python3
-"""The Painfully Honest Out-of-Office — make.fun entry (v1).
+"""The Painfully Honest Out-of-Office — make.fun entry (v2).
 
 Writes a single painfully honest but still polite out-of-office auto-reply
 of at most 200 characters to $MAKEFUN_OUTPUT_DIR/entry.txt (default
 /output), validating the gate (1-200 chars, not only whitespace, single
 line) before writing. Stdlib only.
 
-v1 line (tournament champion, round 1): the last email answered properly
-was the one that got me this job.
+v2 revision: the v1 line won the round-1 tournament but lost head-to-head
+to the strongest visible field line ("the 47 emails marked urgent will
+still be marked urgent when I return..."), so a fresh round of candidates
+was generated and tournament-judged. The new champion admits a more
+private truth — answering email in order of affection, not arrival — with
+a concrete, quotable image (the leaving do), and beats all 8 strongest
+visible lines head-to-head, 8/8, net margin +16.
 """
 
 import os
 import sys
 
 ENTRY = (
-    "I am out of office until Monday, and honestly the last email I "
-    "answered properly was the one that got me this job, so thank you "
-    "for your patience while I find that person again."
+    "I am out until Monday, and your email joins the queue I answer in "
+    "order of who I would miss at the leaving do, so thank you for your "
+    "patience while I rank my affections."
 )
 
 
